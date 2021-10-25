@@ -1,0 +1,165 @@
+import sys
+print("1.Give the sequence"'\n'"2.Open the file")
+f=input("Enter 1 or 2: ")
+if f=="1":
+    seq =input("Enter the nucleotide sequence: ")
+elif f=="2":
+    name = input("Enter the file name: ")
+    file=open(name)
+    seq=''
+    for i in file:
+        seq=seq+i
+stdoutOrigin=sys.stdout
+sys.stdout = open("log1.txt", "w")
+print("The given sequence is: ",seq.upper())
+if len(seq)%3==0:
+    print("it contains full codons")
+else:
+    print("it doesnt contain fully codons")
+seq=seq.rstrip()
+mRNA=''
+seq=seq.upper()
+if "TATA" in seq:
+    print("TATA box is found in the given sequence")
+elif "TATA" not in seq:
+    print("TATA box is not found in the given sequence")
+if len(seq)>=10:
+    for seqs in seq:
+        if seqs=="T":
+            seqs="U"
+        mRNA=mRNA+seqs
+    print("mRNA sequence is:",mRNA,end='\n''\n')
+    mrna=mRNA
+    mrna3=mRNA
+    rmrna1=mRNA
+    rmrna2=mRNA
+    rmrna3=mRNA
+    o = []
+    while mRNA:
+        o.append(mRNA[:3])
+        mRNA = mRNA[3:]
+
+    sc='-'#amino acid table
+    aa_table = {'UUU':['F','Phe'],'UUC':['F','Phe'],'UUA':['L','Leu'],'UUG':['L','Leu'],
+                'CUU':['L','Leu'],'CUC':['L','Leu'],'CUA':['L','Leu'],'CUG':['L','Leu'],
+                'AUU':['I','Ile'],'AUC':['I','Ile'],'AUA':['I','Ile'],'AUG':['M','Met'],
+                'GUU':['V','Val'],'GUC':['V','Val'],'GUA':['V','Val'],'GUG':['V','Val'],
+                'UCU':['S','Ser'],'UCC':['S','Ser'],'UCA':['S','Ser'],'UCG':['S','Ser'],
+                'CCU':['P','Pro'],'CCC':['P','Pro'],'CCA':['P','Pro'],'CCG':['P','Pro'],
+                'ACU':['T','Thr'],'ACC':['T','Thr'],'ACA':['T','Thr'],'ACG':['T','Thr'],
+                'GCU':['A','Ala'],'GCC':['A','Ala'],'GCA':['A','Ala'],'GCG':['A','Ala'],
+                'UAU':['Y','Tyr'],'UAC':['Y','Tyr'],'UAA':[sc,'ochre'],'UAG':[sc,'amber'],
+                'CAU':['H','His'],'CAC':['H','His'],'CAA':['Q','Gln'],'CAG':['Q','Gln'],
+                'AAU':['N','Asn'],'AAC':['N','Asn'],'AAA':['K','Lys'],'AAG':['K','Lys'],
+                'GAU':['D','Asp'],'GAC':['D','Asp'],'GAA':['E','Glu'],'GAG':['E','Glu'],
+                'UGU':['C','Cys'],'UGC':['C','Cys'],'UGA':[sc,'opal'],'UGG':['W','Trp'],
+                'CGU':['R','Arg'],'CGC':['R','Arg'],'CGA':['R','Arg'],'CGG':['R','Arg'],
+                'AGU':['S','Ser'],'AGC':['S','Ser'],'AGA':['R','Arg'],'AGG':['R','Arg'],
+                'GGU':['G','Gly'],'GGC':['G','Gly'],'GGA':['G','Gly'],'GGG':['G','Gly']}
+    y=[]
+    for i in o:
+        for k,v in aa_table.items():
+            if i==k:
+                y.append(v[0])
+    qq=''
+    for ii in y:
+        qq=qq+ii
+    print("The 1st frame amino acid sequence is: ",qq,'\n')
+    pp=[]
+    while mrna:
+        pp.append(mrna[1:4])
+        mrna=mrna[3:]
+    tt=[]
+    for ii in pp:
+        for kk,vv in aa_table.items():
+            if ii==kk:
+                tt.append(vv[0])
+    u=''
+    for q in tt:
+        u=u+q
+    print("The 2nd frame amino acid sequence is:",u,'\n')
+    #3rd frame
+    oo=[]
+    while mrna3:
+        oo.append(mrna3[2:5])
+        mrna3=mrna3[3:]
+    ty=[]
+    for jj in oo:
+        for ky,vl in aa_table.items():
+            if jj==ky:
+                ty.append(vl[0])
+    ui=''
+    for ttt in ty:
+        ui=ui+ttt
+    print("The 3rd frame amino acid sequence is:",ui,'\n')
+
+
+    #reverse sequence
+    rmrna=list(rmrna1)
+    rmrna.reverse()
+    rmrna2=''
+    for i in rmrna:
+        rmrna2=rmrna2+i
+    #print("The reverse mrna is:",rmrna2)
+    rrmrna2=''
+    for qq in rmrna2:
+        if qq=="A":
+            rmrna2="U"
+            rrmrna2=rrmrna2+rmrna2
+        elif qq=="U":
+            rmrna2="A"
+            rrmrna2=rrmrna2+rmrna2
+        elif qq=="C":
+            rmrna2="G"
+            rrmrna2=rrmrna2+rmrna2
+        elif qq=="G":
+            rmrna2="C"
+            rrmrna2=rrmrna2+rmrna2
+    rmrna1=rrmrna2
+    rmrna3=rrmrna2
+    rmrna4=rrmrna2
+    l=[]
+    while rmrna1:
+        l.append(rmrna1[0:3])
+        rmrna1=rmrna1[3:]
+    j=[]
+    for l1 in l:
+        for ks,vs in aa_table.items():
+            if l1==ks:
+                j.append(vs[0])
+    jj=''
+    for u in j:
+        jj=jj+u
+
+    print("The reverse 1st frame aa sequece is: ",jj,'\n')
+    D=[]
+    while rmrna3:
+        D.append(rmrna3[1:4])
+        rmrna3=rmrna3[3:]
+    DF=[]
+    for H in D:
+        for KJ,VJ in aa_table.items():
+            if H==KJ:
+                DF.append(VJ[0])
+    JH=''
+    for FG in DF:
+        JH=JH+FG
+    print("The reverse 2nd frame aa sequence is: ",JH,'\n')
+    #reverse 3rd frame
+    A=[]
+    while rmrna4:
+        A.append(rmrna4[2:5])
+        rmrna4=rmrna4[3:]
+    B=[]
+    for BO in A:
+        for KY,VLL in aa_table.items():
+            if BO==KY:
+                B.append(VLL[0])
+    KR=''
+    for AA in B:
+        KR=KR+AA
+    print("The reverse 3rd frame aa sequence is: ",KR,'\n')
+else:
+    print("please give atleast morethan 10 sequence!")
+sys.stdout.close()
+sys.stdout=stdoutOrigin
