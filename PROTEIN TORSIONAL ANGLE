@@ -1,0 +1,254 @@
+#BOND LENGTH or BOND DISTANCE
+import math
+print("Welcome to BOND LENGTH program !!")
+#x1=(input("Enter N atom: "))
+#x1=x1.split(' ')
+N=dict()
+CA=dict()
+m=1
+while m<=6:
+    try:
+        if m==1:
+            N["x1"]=float(input("Enter N ATOM x1: "))
+            m=m+1
+    except:
+        print("Please enter a float value!")
+        continue
+    try:
+        if m==2:
+            N["y1"]=float(input("Enter N ATOM y1: "))
+            m=m+1
+    except:
+        print("Please enter a float value!")
+        continue
+    try:
+        if m==3:
+            N["z1"]=float(input("Enter N ATOM z1: "))
+            m=m+1
+    except:
+        print("Please enter a float value!")
+        continue
+    try:
+        if m==4:
+            CA["x2"]=float(input("Enter CA ATOM x2: "))
+            m=m+1
+    except:
+        print("Please enter a float value!")
+        continue
+    try:
+        if m==5:
+            CA["y2"]=float(input("Enter CA ATOM y2: "))
+            m=m+1
+    except:
+        print("Please enter a float value!")
+        continue
+    try:
+        if m==6:
+            CA["z2"]=float(input("Enter CA ATOM z2: "))
+            m=m+1
+    except:
+        print("Please enter a float value!")
+        continue
+D=(((N["x1"]-CA["x2"])**2)+((N['y1']-CA['y2'])**2)+((N["z1"]-CA["z2"])**2))
+D=(math.sqrt(D))
+print("%.4f" % D,"Amstrong","\t")
+
+####################################################################################################################################
+#BOND ANGLE
+print("Welcome to BOND ANGLE PROGRAM !!")
+import math
+A=dict()
+B=dict()
+C=dict()
+A["x1"]=float(input("Enter N ATOM x1: "))
+A["y1"]=float(input("Enter N ATOM y1: "))
+A["z1"]=float(input("Enter N ATOM z1: "))
+B["x2"]=float(input("Enter CA ATOM x2: "))
+B["y2"]=float(input("Enter CA ATOM y2: "))
+B["z2"]=float(input("Enter CA ATOM z2: "))
+C["x3"]=float(input("Enter C ATOM x3: "))
+C["y3"]=float(input("Enter C ATOM y3: "))
+C["z3"]=float(input("Enter C ATOM z3: "))
+print("To find the bond angle")
+#formula is: acos((A.B)/modA*modB)
+#A=A-B
+modA=(((A["x1"]-B["x2"])**2)+((A['y1']-B['y2'])**2)+((A['z1']-B['z2'])**2))
+modA=math.sqrt(modA)
+print("%.4f"% modA,"modA","\n")
+#B=B-C
+modB=(((B["x2"]-C["x3"])**2)+((B["y2"]-C["y3"])**2)+((B["z2"]-C['z3'])**2))
+modB=math.sqrt(modB)
+print("%.4f"% modB,"modB","\n")
+#A-B
+AB=(((A["x1"]-B['x2'])*(B["x2"]-C["x3"]))+((A["y1"]-B['y2'])*(B["y2"]-C["y3"]))+((A["z1"]-B["z2"])*(B["z2"]-C["z3"])))
+print("A-B: ","%.4f"%AB,"\n")
+modAB=modA*modB
+print("%.4f"%modAB,"\n")
+pi=(AB/modAB)
+pii=math.degrees(math.acos(-pi))
+print( "pii value is: ","%.4f"%pii,"degree","\t")
+
+####################################################################################################################################
+
+print("Welcome to Torsion Angle: PHI !")
+import math
+A=dict()
+B=dict()
+C=dict()
+D=dict()
+A["w1"]=float(input("Enter C atom w1: "))
+print("\n")
+A["w2"]=float(input("Enter C atom w2: "))
+print("\n")
+A["w3"]=float(input("Enter C atom w3: "))
+print("\n")
+B["x1"]=float(input("Enter N atom x1: "))
+print("\n")
+B["x2"]=float(input("Enter N atom x2: "))
+print("\n")
+B["x3"]=float(input("Enter N atom x3: "))
+print("\n")
+C["y1"]=float(input("Enter CA atom y1: "))
+print("\n")
+C["y2"]=float(input("Enter CA atom y2: "))
+print("\n")
+C["y3"]=float(input("Enter CA atom y3: "))
+print("\n")
+D["z1"]=float(input("Enter C atom z1: "))
+print("\n")
+D["z2"]=float(input("Enter C atom z2: "))
+print("\n")
+D["z3"]=float(input("Enter C atom z3: "))
+print("\n")
+#E=BA*BC
+#BA=B-A.....xxx.....A-B
+BA1=(A["w1"]-B["x1"])
+BA2=(A["w2"]-B["x2"])
+BA3=(A["w3"]-B["x3"])
+print("BA is: ","%.4f"%BA1,"%.4f"%BA2,BA3,"\n")
+#BC=C-B
+BC1=(C["y1"]-B["x1"])
+BC2=(C["y2"]-B["x2"])
+BC3=(C["y3"]-B["x3"])
+print("BC is: ","%.4f"%BC1,"%.4f"%BC2,"%.4f"%BC3,"\n")
+#TO FIND E VECTOR
+Ei=((BA2*BC3)-(BA3*BC2))
+Ej=-((BA1*BC3)-(BA3*BC1))
+Ek=(BA1*BC2)-(BA2*BC1)
+print("Ei Ej Ek is: ","%.4f"%Ei,"%.4f"%Ej,"%.4f"%Ek,"\n")
+E=((Ei**2)+(Ej**2)+(Ek**2))
+E=math.sqrt(E)
+print("E vector is: ","%.4f"%E,"\n")
+#F=CB*CD
+#CB=B-C
+CB1=(B["x1"]-C["y1"])
+CB2=(B["x2"]-C["y2"])
+CB3=(B["x3"]-C["y3"])
+print("CB is: ","%.4f"%CB1,"%.4f"%CB2,"%.4f"%CB3,"\n")
+#CD=D-C
+CD1=(D["z1"]-C["y1"])
+CD2=(D["z2"]-C["y2"])
+CD3=(D["z3"]-C["y3"])
+print("CD is: ","%.4f"%CD1,"%.4f"%CD2,"%.4f"%CD3,"\n")
+#TO FIND F VECTOR
+Fi=(CB2*CD3)-(CB3*CD2)
+Fj=-((CB1*CD3)-(CB3*CD1))
+Fk=(CB1*CD2)-(CB2*CD1)
+print("Fi Fj Fk is: ","%.4f"%Fi,"%.4f"%Fj,"%.4f"%Fk,"\n")
+F=((Fi**2)+(Fj**2)+(Fk**2))
+F=math.sqrt(F)
+print("F vector is: ","%.4f"%F,"\n")
+#modE*modF
+modEF=E*F
+print("modulus of EF: ","%.4f"%modEF,"\n")
+#E.F
+EF=((Ei*Fi)+(Ej*Fj)+(Ek*Fk))
+print("E.F vector is: ","%.4f"%EF,"\n")
+#forumula acos(E.F/modE.modF)
+#PIE=math.acos(EF/modEF)
+q=math.acos(EF/modEF)
+print("cos inverse is: ",q,"\n")
+PIE=math.degrees(math.acos(EF/modEF))
+print("PI VALUE IS: ","%.4f"%PIE,"degree","\t")
+
+####################################################################################################################################
+import math
+print("Welcome to Torsion Angle: PSI !")
+A=dict()
+B=dict()
+C=dict()
+D=dict()
+A["w1"]=float(input("Enter N atom w1: "))
+print("\n")
+A["w2"]=float(input("Enter N atom w2: "))
+print("\n")
+A["w3"]=float(input("Enter N atom w3: "))
+print("\n")
+B["x1"]=float(input("Enter CA atom x1: "))
+print("\n")
+B["x2"]=float(input("Enter CA atom x2: "))
+print("\n")
+B["x3"]=float(input("Enter CA atom x3: "))
+print("\n")
+C["y1"]=float(input("Enter C atom y1: "))
+print("\n")
+C["y2"]=float(input("Enter C atom y2: "))
+print("\n")
+C["y3"]=float(input("Enter C atom y3: "))
+print("\n")
+D["z1"]=float(input("Enter N atom z1: "))
+print("\n")
+D["z2"]=float(input("Enter N atom z2: "))
+print("\n")
+D["z3"]=float(input("Enter N atom z3: "))
+print("\n")
+#E=BA*BC
+#BA=A-B
+BA1=(A["w1"]-B["x1"])
+BA2=(A["w2"]-B["x2"])
+BA3=(A["w3"]-B["x3"])
+print("BA is: ","%.4f"%BA1,"%.4f"%BA2,BA3,"\n")
+#BC=C-B
+BC1=(C["y1"]-B["x1"])
+BC2=(C["y2"]-B["x2"])
+BC3=(C["y3"]-B["x3"])
+print("BC is: ","%.4f"%BC1,"%.4f"%BC2,"%.4f"%BC3,"\n")
+#TO FIND E VECTOR
+Ei=((BA2*BC3)-(BA3*BC2))
+Ej=-((BA1*BC3)-(BA3*BC1))
+Ek=((BA1*BC2)-(BA2*BC1))
+print("Ei Ej Ek is: ","%.4f"%Ei,"%.4f"%Ej,"%.4f"%Ek,"\n")
+E=((Ei**2)+(Ej**2)+(Ek**2))
+E=math.sqrt(E)
+print("E vector is: ","%.4f"%E,"\n")
+#F=CB*CD
+#CB=C-B
+CB1=(B["x1"]-C["y1"])
+CB2=(B["x2"]-C["y2"])
+CB3=(B["x3"]-C["y3"])
+print("CB is: ","%.4f"%CB1,"%.4f"%CB2,"%.4f"%CB3,"\n")
+#CD=D-C
+CD1=(D["z1"]-C["y1"])
+CD2=(D["z2"]-C["y2"])
+CD3=(D["z3"]-C["y3"])
+print("CD is: ","%.4f"%CD1,"%.4f"%CD2,"%.4f"%CD3,"\n")
+#TO FIND F VECTOR
+Fi=((CB2*CD3)-(CB3*CD2))
+Fj=-((CB1*CD3)-(CB3*CD1))
+Fk=((CB1*CD2)-(CB2*CD1))
+print("Fi Fj Fk is: ","%.4f"%Fi,"%.4f"%Fj,"%.4f"%Fk,"\n")
+F=((Fi**2)+(Fj**2)+(Fk**2))
+F=math.sqrt(F)
+print("F vector is: ","%.4f"%F,"\n")
+#modE*modF
+modEF=E*F
+print("modulus of EF: ","%.4f"%modEF,"\n")
+#E.F
+EF=((Ei*Fi)+(Ej*Fj)+(Ek*Fk))
+print("E.F vector is: ","%.4f"%EF,"\n")
+#forumula acos(E.F/modE.modF)
+#PIE=math.acos(EF/modEF)
+q=math.acos(EF/modEF)
+print("cos inverse is: ",q,"\n")
+PSI=math.degrees(math.acos(EF/modEF))
+print("PSI VALUE IS: ","%.4f"%PSI,"degree","\t")
